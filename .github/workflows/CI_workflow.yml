@@ -2,37 +2,44 @@ name: Continuous Integration
 
 on:
   pull_request:
-    branches: ["main"]
+    branches: ['main']
 
 jobs:
   ci_verification:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [14.x]
-
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Checkout Code From the Repository
+        uses: actions/checkout@v3
+        
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Test Customer Service
+          node-version: 18.x
+          
+      - name: Run Customer Clean Install
+        run: npm ci
         working-directory: ./customer
-        run: |
-          npm ci
-          npm test
-
-      - name: Test Products Service
+        
+      - name: Run Customer Test Script
+        run: npm test
+        working-directory: ./customer
+        
+      - name: Run Products Clean Install
+        run: npm ci
         working-directory: ./products
-        run: |
-          npm ci
-          npm test
-
-      - name: Test Shopping Service
+        
+      - name: Run Products Test Script
+        run: npm test
+        working-directory: ./products
+        
+        
+      - name: Run Shopping Clean Install
+        run: npm ci
         working-directory: ./shopping
-        run: |
-          npm ci
-          npm test
+        
+      - name: Run Shopping Test Script
+        run: npm test
+        working-directory: ./shopping
+        
+      
