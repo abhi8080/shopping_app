@@ -2,7 +2,7 @@ name: Continuous Integration
 
 on:
   pull_request:
-    branches: ["main"]
+    branches: ['main']
 
 jobs:
   ci_verification:
@@ -30,6 +30,7 @@ jobs:
         run: |
           npm ci
           npm test
+
 
       - name: Test Shopping Service
         working-directory: ./shopping
