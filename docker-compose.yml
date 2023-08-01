@@ -1,9 +1,9 @@
-version: '3'
+version: "3"
 services:
   nosql-db:
     image: mongo
     ports:
-      - '27018:27017'
+      - "27018:27017"
     container_name: nosql-db
     volumes:
       - ./db/:/data/db
@@ -13,10 +13,10 @@ services:
       context: ./products
     container_name: products
     ports:
-      - '8002:8002'
+      - "8002:8002"
     restart: always
     depends_on:
-      - 'nosql-db'
+      - "nosql-db"
     volumes:
       - .:/app
       - /app/products/node_modules
@@ -29,10 +29,10 @@ services:
       context: ./shopping
     container_name: shopping
     ports:
-      - '8003:8003'
+      - "8003:8003"
     restart: always
     depends_on:
-      - 'nosql-db'
+      - "nosql-db"
     volumes:
       - .:/app
       - /app/shopping/node_modules
@@ -44,10 +44,10 @@ services:
       context: ./customer
     container_name: customer
     ports:
-      - '8001:8001'
+      - "8001:8001"
     restart: always
     depends_on:
-      - 'nosql-db'
+      - "nosql-db"
 
     volumes:
       - .:/app/
